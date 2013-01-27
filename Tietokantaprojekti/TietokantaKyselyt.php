@@ -10,7 +10,7 @@
  *
  * @author lode
  */
-class lisaaKantaan {
+class TietokantaKyselyt {
 
     private $_pdo;
 
