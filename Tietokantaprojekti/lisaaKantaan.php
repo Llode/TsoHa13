@@ -19,7 +19,8 @@ class lisaaKantaan {
     }
 
     public function lisaaKayttajaKantaan($tunnus, $salasana) {
-        $kysely = $this->valmistele('INSERT INTO KAYTTAJAT (Tunnus, Salasana) VALUES (?, ?)');
+        $kysely = $this->valmistele('INSERT INTO KAYTTAJAT (Tunnus, Salasana)
+                                    VALUES (?, ?)');
         if ($kysely->execute(array($tunnus, $salasana))) {
             return $kysely->fetchObject();
         }
@@ -27,7 +28,8 @@ class lisaaKantaan {
     }
 
     public function haeJuoma($nimi) {
-        $kysely = $this->valmistele('SELECT * FROM JUOMAT WHERE Juoma = ? ORDER BY Juoma');
+        $kysely = $this->valmistele('SELECT * FROM JUOMAT WHERE Juoma = ?
+                                    ORDER BY Juoma');
         if ($kysely->execute(array($nimi))) {
             return $kysely->fetchObject();
         } else {
@@ -36,7 +38,8 @@ class lisaaKantaan {
     }
 
     public function haeJuomanAlt($nimi) {
-        $kysely = $this->valmistele('SELECT * FROM NIMET WHERE Nimi = ? ORDER BY Nimi');
+        $kysely = $this->valmistele('SELECT * FROM NIMET WHERE Nimi = ? 
+                                        ORDER BY Nimi');
         if ($kysely->execute(array($nimi))) {
             return $kysely->fetchObject();
         } else {
@@ -49,7 +52,7 @@ class lisaaKantaan {
         if ($kysely->execute(array($nimi))) {
             return $kysely->fetchObject();
         } else {
-            haeJuomanAlt($nimi);
+            haeAltinID($nimi);
         }
     }
 
@@ -75,7 +78,8 @@ class lisaaKantaan {
         if ($this->haeJuoma($nimi)) {
             return null;
         } else {
-            $kysely = $this->valmistele('INSERT INTO JUOMAT (Juoma, Ohje) VALUES (?, ?) RETURNING JuomaID');
+            $kysely = $this->valmistele('INSERT INTO JUOMAT (Juoma, Ohje)
+                                        VALUES (?, ?) RETURNING JuomaID');
             if ($kysely->execute(array($nimi, $ohje))) {
                 return $kysely->fetchObject()->JuomaID;
             }
@@ -83,7 +87,8 @@ class lisaaKantaan {
     }
 
     public function lisaaAinesKantaan($aines) {
-        $kysely = $this->valmistele('INSERT INTO AINES (aines) VALUES (?) RETURNING ainesID');
+        $kysely = $this->valmistele('INSERT INTO AINES (aines) VALUES (?) 
+                                    RETURNING ainesID');
         if ($kysely->execute(array($aines))) {
             return $kysely->fetchObject()->ainesID;
         }
@@ -98,7 +103,8 @@ class lisaaKantaan {
             $aines_id = $this->lisaaAinesKantaan($aines);
         }
 
-        $kysely = $this->valmistele('INSERT INTO OSAT (JuomaID, ainesID, maara) VALUES (?, ?, ?) RETURNING JuomaID');
+        $kysely = $this->valmistele('INSERT INTO OSAT (JuomaID, ainesID, maara)
+                                    VALUES (?, ?, ?) RETURNING JuomaID');
         if ($kysely->execute(array($drinkki_id, $aines_id, $maara))) {
             return $kysely->fetchObject()->JuomaID;
         }
@@ -107,7 +113,8 @@ class lisaaKantaan {
     public function lisaaJuomalleNimi($juoma, $alt) {
         $drinkki_id = $this->haeJuomanID($juoma);
 
-        $kysely = $this->valmistele('INSERT INTO NIMET (JuomaID, NIMI) VALUES (?, ?)');
+        $kysely = $this->valmistele('INSERT INTO NIMET (JuomaID, NIMI)
+                                        VALUES (?, ?)');
         if ($kysely->execute(array($drinkki_id, $alt))) {
             return $kysely->fetchOject();
         }
