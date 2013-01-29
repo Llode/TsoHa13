@@ -1,25 +1,25 @@
 create table JUOMAT (
 JuomaID		serial PRIMARY KEY,
-Lisannyt	Kayttaja_ID,
+Lisannyt	integer,
 Juoma		varchar(50) not null unique,
-Lisatty		Date not null CURRENT_DATE,
+Lisatty		Date,
 Ohje		varchar(200) not null
 );
 
 create table NIMET (
-JuomaID 	serial PRIMARY KEY,
+JuomaID 	integer PRIMARY KEY,
 Nimi		varchar(50)
 );
 
 create table OSAT (
-JuomaID 	serial PRIMARY KEY,
-ainesID		serial 
+JuomaID 	integer PRIMARY KEY,
+ainesID		integer,
 maara		varchar(20)
 );
 
 create table KAYTTAJAT (
 Kayttaja_ID	serial PRIMARY KEY,
-Rekpvm		Date not null CURRENT_DATE,
+Rekpvm		Date,
 Tunnus		varchar(16) unique,
 Salasana	varchar(16) not null
 );

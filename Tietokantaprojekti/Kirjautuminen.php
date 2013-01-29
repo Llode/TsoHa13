@@ -1,12 +1,12 @@
 <?php
-$otsikko = 'Drinkkikone - luo tunnukset';
+$otsikko = 'Drinkkikone - kirjaudu sisään';
 ?>
-<h2>Luo uusi tunnus</h2>
-<p>Luo tunnus käyttääksesi palvelua!</p>
+<h2>Kirjautuminen</h2>
+<p>Kirjaudu sisään!</p>
 
-<form action="Kayttajatunnukset.php?luoTunnus" method="POST">
+<form action="Kayttajatunnukset.php?sisaan" method="POST">
     <fieldset>
-        <legend>Anna uusi käyttäjätunnus ja salasana</legend>
+        <legend>Kirjaudu sisään</legend>
         <label for="tunnus">Käyttäjätunnus:</label>
         <input type="text" name="tunnus" id="tunnus" />
         <label for="salasana">Salasana:</label>

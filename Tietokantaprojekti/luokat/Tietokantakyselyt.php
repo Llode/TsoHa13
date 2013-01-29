@@ -1,10 +1,4 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of lisaaKayttaja
  *
@@ -16,6 +10,16 @@ class TietokantaKyselyt {
 
     public function __construct($pdo) {
         $this->_pdo = $pdo;
+    }
+    
+    public function tunnistaKayttaja($tunnus, $salasana) {
+        $kysely = $this->valmistele('SELECT kayttaja_ID FROM KAYTTAJAT WHERE 
+                                     Tunnus = ? AND salasana = ?');
+        if($kysely->execute(array($tunnus, $salasana))) {
+            return $kysely->fetchObject();
+        } else {
+            return null;
+        }
     }
 
     public function lisaaKayttajaKantaan($tunnus, $salasana) {
@@ -119,11 +123,22 @@ class TietokantaKyselyt {
             return $kysely->fetchOject();
         }
     }
+    
+    public function lisaaKayttajakantaan($tunnus, $salasana){
+        $kysely = $this->valmistele('INSERT INTO KAYTTAJAT (Tunnus, Salasana)
+                                        VALUES (?, ?)');
+        if($kysely->execute(array($tunnus, $salasana))){
+            return $kysely->fetchObject();
+        }
+    }
 
     private function valmistele($sqllause) {
         return $this->_pdo->prepare($sqllause);
     }
-
+    
 }
 
+require dirname(__file__).'/home/lode/htdocs/asetukset.php';
+
+$kyselija = new Kyselyt($pdo);
 ?>
