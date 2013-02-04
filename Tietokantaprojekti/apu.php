@@ -1,6 +1,6 @@
 <?php
 
-require_once 'luokat/Tietokantakysely.php';
+require_once 'luokat/Kyselyt.php';
 require_once 'luokat/Sessio.php';
 
 function ohjaa($osoite) {

@@ -4,7 +4,7 @@
  *
  * @author lode
  */
-class TietokantaKyselyt {
+class Kyselyt {
 
     private $_pdo;
 

@@ -2,8 +2,8 @@
 
 require_once 'apu.php';
 
-if (isset($_GET['Luo Tunnus'])) {
-    $kayttaja = $kyselija->lisaaKayttajaKantaan($POST['tunnus'], $_POST['salasana']);
+if (isset($_GET['luoTunnus'])) {
+    $kayttaja = $kyselija->lisaaKayttajaKantaan($_POST['tunnus'], $_POST['salasana']);
     if ($kayttaja) {
         $sessio->kayttaja_ID = $kayttaja->id;
         ohjaa('index.php');
@@ -12,7 +12,7 @@ if (isset($_GET['Luo Tunnus'])) {
     }
     
 } elseif (isset($_GET['sisaan'])) {
-    $kayttaja = $kyselija->tunnistakayttaja($_POST['tunnus'], $_POST['salasana']);
+    $kayttaja = $kyselija->tunnistaKayttaja($_POST['tunnus'], $_POST['salasana']);
     if ($kayttaja) {
         $sessio->kayttaja_ID = $kayttaja->id;
         ohjaa('index.php');
