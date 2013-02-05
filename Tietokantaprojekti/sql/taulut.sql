@@ -1,7 +1,7 @@
 create table JUOMAT (
 JuomaID		serial PRIMARY KEY,
 Lisannyt	integer,
-Juoma		varchar(50) not null unique,
+juomannimi    	varchar(50) not null unique,
 Lisatty		Date,
 Ohje		varchar(200) not null
 );
@@ -26,5 +26,5 @@ Salasana	varchar(16) not null
 
 create table AINES (
 ainesID		serial PRIMARY KEY,
-aines		varchar(50) not null unique
+ainesnimi	varchar(50) not null unique
 );

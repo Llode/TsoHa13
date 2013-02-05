@@ -30,29 +30,38 @@ class Kyselyt {
         }
         return false;
     }
+    
 
+    public function haeKaikkiJuomat(){
+        $kysely = $this->valmistele('SELECT * FROM JUOMAT ORDER BY NIMI');
+        if($kysely->execute()){
+            return $kysely->fetchAll(PDO::FETCH_OBJ);
+        }
+        return false;
+    }
+    
     public function haeJuoma($nimi) {
-        $kysely = $this->valmistele('SELECT * FROM JUOMAT WHERE Juoma = ?
+        $kysely = $this->valmistele('SELECT * FROM JUOMAT WHERE Juomannimi like ?
                                     ORDER BY Juoma');
         if ($kysely->execute(array($nimi))) {
-            return $kysely->fetchObject();
+            return $kysely->fetchAll(PDO::FETCH_OBJ);
         } else {
             haeJuomanAlt($nimi);
         }
     }
 
     public function haeJuomanAlt($nimi) {
-        $kysely = $this->valmistele('SELECT * FROM NIMET WHERE Nimi = ? 
+        $kysely = $this->valmistele('SELECT * FROM NIMET WHERE Nimi like ? 
                                         ORDER BY Nimi');
         if ($kysely->execute(array($nimi))) {
-            return $kysely->fetchObject();
+            return $kysely->fetchAll(PDO::FETCH_OBJ);
         } else {
             return null;
         }
     }
 
     public function haeJuomaID($nimi) {
-        $kysely = $this->valmistele('SELECT JuomaID FROM JUOMAT WHERE Juoma = ?');
+        $kysely = $this->valmistele('SELECT JuomaID FROM JUOMAT WHERE Juomannimi = ?');
         if ($kysely->execute(array($nimi))) {
             return $kysely->fetchObject();
         } else {
@@ -70,7 +79,7 @@ class Kyselyt {
     }
 
     public function haeaineID($aines) {
-        $kysely = $this->valmistele('SELECT ainesID FROM AINES WHERE aines = ?');
+        $kysely = $this->valmistele('SELECT ainesID FROM AINES WHERE ainesnimi = ?');
         if ($kysely->execute(array($aines))) {
             return $kysely->fetchObject();
         } else {
@@ -78,6 +87,15 @@ class Kyselyt {
         }
     }
 
+    public function haeAines($ainesID){
+        $kysely = $this->valmistele('SELECT ainesnimi FROM AINES WHERE ainesID = ?');
+        if($kysely->execute(array($ainesID))) {
+            return $kysely->fetchObject();
+        } else {
+            return null;
+        }
+    }
+    
     public function lisaaJuoma($nimi, $ohje) {
         if ($this->haeJuoma($nimi)) {
             return null;
@@ -124,13 +142,7 @@ class Kyselyt {
         }
     }
     
-    public function lisaaKayttajakantaan($tunnus, $salasana){
-        $kysely = $this->valmistele('INSERT INTO KAYTTAJAT (Tunnus, Salasana)
-                                        VALUES (?, ?)');
-        if($kysely->execute(array($tunnus, $salasana))){
-            return $kysely->fetchObject();
-        }
-    }
+
 
     private function valmistele($sqllause) {
         return $this->_pdo->prepare($sqllause);
@@ -138,7 +150,7 @@ class Kyselyt {
     
 }
 
-require dirname(__file__).'/home/lode/htdocs/asetukset.php';
+require dirname(__file__).'/../asetukset.php';
 
 $kyselija = new Kyselyt($pdo);
 ?>

@@ -25,7 +25,10 @@ class Sessio {
         unset($_SESSION[$avain]);
     }
 
+    public function ohjausmsg(){
+        
+    }
 }
 
-$sessio = new Sessio();
-?>
+$Sessio = new Sessio();
+

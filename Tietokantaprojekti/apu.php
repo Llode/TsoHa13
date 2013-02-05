@@ -15,7 +15,7 @@ function kirjautunut() {
 
 function varmistus() {
     if (!kirjautunut()) {
-        ohjaa('kirjautuminen.php');
+        ohjaa('Kirjautuminen.php');
     }
 }
 

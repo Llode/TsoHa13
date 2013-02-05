@@ -4,5 +4,5 @@ require_once 'apu.php';
 
 varmistus();
 
-$juomalista = $kyselija->haeJuoma('*');
+$juomalista = $kyselija->haeKaikkiJuomat();
 ?>

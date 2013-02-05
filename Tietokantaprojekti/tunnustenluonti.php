@@ -14,5 +14,5 @@ $otsikko = 'Drinkkikone - luo tunnukset';
         <input type="submit" value="Luo tunnus" />
     </fieldset>
 </form>
-
+<a href="/../Kirjautuminen.php">Kirjaudu sisään tästä!</a>
 <?php ?>

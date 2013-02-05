@@ -11,8 +11,8 @@ $otsikko = 'Drinkkikone - kirjaudu sisään';
         <input type="text" name="tunnus" id="tunnus" />
         <label for="salasana">Salasana:</label>
         <input type="password" name="salasana" id="salasana" />
-        <input type="submit" value="Luo tunnus" />
+        <input type="submit" value="Sisään!" />
     </fieldset>
 </form>
-
+<a href="/../tunnustenluonti.php">Luo tunnukset tästä!</a>
 <?php ?>
