@@ -24,9 +24,9 @@ class Kyselyt {
 
     public function lisaaKayttajaKantaan($tunnus, $salasana) {
         $kysely = $this->valmistele('INSERT INTO KAYTTAJAT (Tunnus, Salasana)
-                                    VALUES (?, ?)');
+                                    VALUES (?, ?) RETURNING Kayttaja_ID');
         if ($kysely->execute(array($tunnus, $salasana))) {
-            return $kysely->fetchObject();
+            return $kysely->fetchColumn();
         }
         return false;
     }
@@ -46,7 +46,7 @@ class Kyselyt {
         if ($kysely->execute(array($nimi))) {
             return $kysely->fetchAll(PDO::FETCH_OBJ);
         } else {
-            haeJuomanAlt($nimi);
+           return $this->haeJuomanAlt($nimi);
         }
     }
 
@@ -56,14 +56,14 @@ class Kyselyt {
         if ($kysely->execute(array($nimi))) {
             return $kysely->fetchAll(PDO::FETCH_OBJ);
         } else {
-            return null;
+            return false;
         }
     }
 
     public function haeJuomaID($nimi) {
         $kysely = $this->valmistele('SELECT JuomaID FROM JUOMAT WHERE Juomannimi = ?');
         if ($kysely->execute(array($nimi))) {
-            return $kysely->fetchObject();
+            return $kysely->fetchColumn();
         } else {
             haeAltinID($nimi);
         }
@@ -72,7 +72,7 @@ class Kyselyt {
     public function haeAltinID($nimi) {
         $kysely = $this->valmistele('SELECT JuomaID FROM NIMET WHERE Nimi = ?');
         if ($kysely->execute(array($nimi))) {
-            return $kysely->fetchObject();
+            return $kysely->fetchColumn();
         } else {
             return null;
         }
@@ -81,18 +81,18 @@ class Kyselyt {
     public function haeaineID($aines) {
         $kysely = $this->valmistele('SELECT ainesID FROM AINES WHERE ainesnimi = ?');
         if ($kysely->execute(array($aines))) {
-            return $kysely->fetchObject();
+            return $kysely->fetchColumn();
         } else {
-            return null;
+            return false;
         }
     }
 
     public function haeAines($ainesID){
         $kysely = $this->valmistele('SELECT ainesnimi FROM AINES WHERE ainesID = ?');
         if($kysely->execute(array($ainesID))) {
-            return $kysely->fetchObject();
+            return $kysely->fetchColumn();
         } else {
-            return null;
+            return false;
         }
     }
     
@@ -100,35 +100,35 @@ class Kyselyt {
         if ($this->haeJuoma($nimi)) {
             return null;
         } else {
-            $kysely = $this->valmistele('INSERT INTO JUOMAT (Juoma, Ohje)
+            $kysely = $this->valmistele('INSERT INTO JUOMAT (Juomannimi, Ohje)
                                         VALUES (?, ?) RETURNING JuomaID');
             if ($kysely->execute(array($nimi, $ohje))) {
-                return $kysely->fetchObject()->JuomaID;
+                return $kysely->fetchColumn();
             }
         }
     }
 
     public function lisaaAinesKantaan($aines) {
-        $kysely = $this->valmistele('INSERT INTO AINES (aines) VALUES (?) 
+        $kysely = $this->valmistele('INSERT INTO AINES (ainesnimi) VALUES (?) 
                                     RETURNING ainesID');
         if ($kysely->execute(array($aines))) {
-            return $kysely->fetchObject()->ainesID;
+            return $kysely->fetchColumn();
         }
     }
 
-    public function lisaaJuomaanAines($juoma, $aines, $maara) {
-        $drinkki_id = $this->haeJuomanID($juoma);
+    public function lisaaJuomaanAines($juomaid, $aines, $maara) {
 
         if ($this->haeaineID($aines)) {
             $aines_id = $this->haeaineID($aines);
         } else {
             $aines_id = $this->lisaaAinesKantaan($aines);
         }
+        var_dump($juomaid);
 
         $kysely = $this->valmistele('INSERT INTO OSAT (JuomaID, ainesID, maara)
                                     VALUES (?, ?, ?) RETURNING JuomaID');
-        if ($kysely->execute(array($drinkki_id, $aines_id, $maara))) {
-            return $kysely->fetchObject()->JuomaID;
+        if ($kysely->execute(array($juomaid, $aines_id, $maara))) {
+            return $kysely->fetchColumn();
         }
     }
 
@@ -138,7 +138,7 @@ class Kyselyt {
         $kysely = $this->valmistele('INSERT INTO NIMET (JuomaID, NIMI)
                                         VALUES (?, ?)');
         if ($kysely->execute(array($drinkki_id, $alt))) {
-            return $kysely->fetchOject();
+            return $kysely->fetchColumn();
         }
     }
     

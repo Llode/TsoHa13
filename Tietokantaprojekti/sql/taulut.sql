@@ -3,7 +3,7 @@ JuomaID		serial PRIMARY KEY,
 Lisannyt	integer,
 juomannimi    	varchar(50) not null unique,
 Lisatty		Date,
-Ohje		varchar(200) not null
+Ohje		varchar(400) not null
 );
 
 create table NIMET (
@@ -12,7 +12,7 @@ Nimi		varchar(50)
 );
 
 create table OSAT (
-JuomaID 	integer PRIMARY KEY,
+JuomaID 	integer, Primary key (JuomaID, ainesID),
 ainesID		integer,
 maara		varchar(20)
 );
