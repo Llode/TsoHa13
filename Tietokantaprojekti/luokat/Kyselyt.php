@@ -14,9 +14,9 @@ class Kyselyt {
     
     public function tunnistaKayttaja($tunnus, $salasana) {
         $kysely = $this->valmistele('SELECT kayttaja_ID FROM KAYTTAJAT WHERE 
-                                     Tunnus = ? AND salasana = ?');
+                                     Tunnus = ? AND Salasana = ?');
         if($kysely->execute(array($tunnus, $salasana))) {
-            return $kysely->fetchObject();
+            return $kysely->fetchColumn();
         } else {
             return null;
         }
@@ -33,7 +33,7 @@ class Kyselyt {
     
 
     public function haeKaikkiJuomat(){
-        $kysely = $this->valmistele('SELECT * FROM JUOMAT ORDER BY NIMI');
+        $kysely = $this->valmistele('SELECT * FROM JUOMAT ORDER BY juomannimi');
         if($kysely->execute()){
             return $kysely->fetchAll(PDO::FETCH_OBJ);
         }

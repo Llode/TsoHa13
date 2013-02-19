@@ -6,7 +6,7 @@ if (isset($_GET['luoTunnus'])) {
     $kayttaja = $kyselija->lisaaKayttajaKantaan($_POST['tunnus'], $_POST['salasana']);
     if ($kayttaja) {
         $Sessio->kayttaja_ID = $kayttaja;
-        ohjaa('index.php');
+        ohjaa('drinkkilista.php');
     } else {
         ohjaa('tunnustenluonti.php');
     }
@@ -15,7 +15,7 @@ if (isset($_GET['luoTunnus'])) {
     $kayttaja = $kyselija->tunnistaKayttaja($_POST['tunnus'], $_POST['salasana']);
     if ($kayttaja) {
         $Sessio->kayttaja_ID = $kayttaja;
-        ohjaa('index.php');
+        ohjaa('drinkkilista.php');
     } else {
         ohjaa('Kirjautuminen.php');
     }

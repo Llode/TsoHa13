@@ -9,8 +9,8 @@ function ohjaa($osoite) {
 }
 
 function kirjautunut() {
-    global $sessio;
-    return isset($sessio->kayttaja_ID);
+    global $Sessio;
+    return isset($Sessio->kayttaja_ID);
 }
 
 function varmistus() {

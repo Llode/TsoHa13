@@ -1,6 +1,9 @@
 <?php
 $otsikko = 'Drinkkikone - pick your poison!';
+require_once 'apu.php';
+varmistus();
 ?>
+
 <h2>Taikuroi oma juomasi!</h2>
 <p>Täytä allaolevat kentät</p>
 <form action="Luodrinkkifunktiot.php?luo" method="POST">
