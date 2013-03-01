@@ -14,15 +14,18 @@ $juomalista = $kyselija->haeKaikkiJuomat();
         <link href="sivu.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <a class="uloskirjautuminen" href="Kayttajatunnukset.php?ulos">ulos</a>
+        <a href="Luodrinkki.php">Lisää drinkki arkistoon!</a>
+        
         <ul class="drinkkilista">
             <?php foreach ($juomalista as $juoma) { ?>
-                <li>  <a href="<?php echo "Resepti.php?resepti=".$juoma->JuomaID ?>"> <?php echo $juoma->juomannimi;?> </a> </li>
+                <li>  <a href="<?php echo "Resepti.php?resepti=" . $juoma->juomaid ?>"> <?php echo $juoma->juomannimi; ?> </a> </li>
             <?php } ?>
         </ul>
-        <a class="uloskirjautuminen" href="Kayttajatunnukset.php?ulos">ulos</a>
-        
-        <div class="resepti-ikkuna" >
-            <iframe src="Resepti.php" name="resepti"></iframe>
-        </div>
+
+
+        <!--        <div class="resepti-ikkuna" >
+                    <iframe src="Resepti.php" name="resepti"></iframe>
+                </div>-->
     </body>
 </html>

@@ -1,18 +1,27 @@
-<?php
-$otsikko = 'Drinkkikone - luo tunnukset';
-?>
-<h2>Luo uusi tunnus</h2>
-<p>Luo tunnus käyttääksesi palvelua!</p>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Drinkkikone - Teretulemast!</title>
+        <link href="sivu.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        
+        <?php
+        $otsikko = 'Drinkkikone - luo tunnukset';
+        ?>
 
-<form action="Kayttajatunnukset.php?luoTunnus" method="POST">
-    <fieldset>
-        <legend>Anna uusi käyttäjätunnus ja salasana</legend>
-        <label for="tunnus">Käyttäjätunnus:</label>
-        <input type="text" name="tunnus" id="tunnus" />
-        <label for="salasana">Salasana:</label>
-        <input type="password" name="salasana" id="salasana" />
-        <input type="submit" value="Luo tunnus" />
-    </fieldset>
-</form>
-<a href="/../Kirjautuminen.php">Kirjaudu sisään tästä!</a>
-<?php ?>
+        <form class="kirjautuminen" action="Kayttajatunnukset.php?luoTunnus" method="POST">
+            <h2>Luo uusi tunnus</h2>
+
+            <label for="tunnus">Käyttäjätunnus:</label>
+            <input type="text" name="tunnus" id="tunnus" />
+            <label for="salasana">Salasana:</label>
+            <input type="password" name="salasana" id="salasana" />
+            <input type="submit" value="Luo tunnus" />
+            <p class="signuplinkki"><a href="/../index.php">Kirjaudu sisään tästä!</a></p>
+        </form>
+        
+        <?php ?>
+    </body>
+</html>

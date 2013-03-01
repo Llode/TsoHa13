@@ -15,8 +15,15 @@ function kirjautunut() {
 
 function varmistus() {
     if (!kirjautunut()) {
-        ohjaa('Kirjautuminen.php');
+        ohjaa('index.php');
     }
 }
+//function oikkavarmistus() {
+//    $lupa = $kyselija->haeKayttajanOikeudet($Sessio->kayttaja_ID);
+//    if($lupa === 0) {
+//        ohjausmsg();
+//        ohjaa('drinkkilista.php');
+//    }
+//}
 
 ?>

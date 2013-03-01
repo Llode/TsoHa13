@@ -17,7 +17,7 @@ if (isset($_GET['luoTunnus'])) {
         $Sessio->kayttaja_ID = $kayttaja;
         ohjaa('drinkkilista.php');
     } else {
-        ohjaa('Kirjautuminen.php');
+        ohjaa('index.php');
     }
     
 } elseif (isset($_GET['ulos'])) {

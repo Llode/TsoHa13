@@ -3,3 +3,4 @@ select * from Kayttajat;
 select * from Juomat;
 select * from Osat;
 select * from Aines;
+select * from Nimet;

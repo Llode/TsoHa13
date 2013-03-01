@@ -7,8 +7,9 @@
 */
 
 body {
-    background-color: #25620b;
-    color: gold;
+/*    background-color: #25620b;*/
+    background-color: #fde7ba;
+    color: black;
 }
 
 footer p {
@@ -16,18 +17,21 @@ footer p {
 }
 
 a {
-    color: goldenrod;
+    color: black;
 }
 a:hover {
-    color : goldenrod;
+    color : black;
 }
 
 .drinkkilista {
-    float: left;
-    background: white;
+/*    float: left;*/
+/*    margin-top: 100px;*/
+    background: #fde7ba;
     color: black;
-    padding: 10px;
+    /*padding: 10px;*/
     list-style: none;
+    width: 600px;
+    margin: 0 auto;
 }
 
 .uloskirjautuminen {
@@ -36,6 +40,7 @@ a:hover {
 .kirjautuminen {
     width: 600px;
     margin: 0 auto;
+    
 }
 
 .kirjautuminen h2 {
