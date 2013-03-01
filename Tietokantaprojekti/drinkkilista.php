@@ -15,6 +15,7 @@ $juomalista = $kyselija->haeKaikkiJuomat();
     </head>
     <body>
         <a class="uloskirjautuminen" href="Kayttajatunnukset.php?ulos">ulos</a>
+        <a href="adminsivu.php">Moderointisivu</a>
         <a href="Luodrinkki.php">Lisää drinkki arkistoon!</a>
         
         <ul class="drinkkilista">

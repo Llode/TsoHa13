@@ -18,12 +18,27 @@ function varmistus() {
         ohjaa('index.php');
     }
 }
-//function oikkavarmistus() {
-//    $lupa = $kyselija->haeKayttajanOikeudet($Sessio->kayttaja_ID);
-//    if($lupa === 0) {
-//        ohjausmsg();
-//        ohjaa('drinkkilista.php');
-//    }
-//}
+
+function oikkavarmistus() {
+    if (kirjautunut()) {
+        global $Sessio;
+        global $kyselija;
+        $lupa = $kyselija->haeKayttajanOikeudet($Sessio->kayttaja_ID);
+        if ($lupa === 0) {
+            ohjaa('virhesivu.php');
+        }
+    }
+}
+
+function adminvarmistus() {
+        if (kirjautunut()) {
+        global $Sessio;
+        global $kyselija;
+        $lupa = $kyselija->haeKayttajanOikeudet($Sessio->kayttaja_ID);
+        if ($lupa != 2) {
+            ohjaa('virhesivu.php');
+        }
+    }
+}
 
 ?>

@@ -24,24 +24,24 @@ class Kyselyt {
     }
 
     public function lisaaKayttajaKantaan($tunnus, $salasana) {
-        $kysely = $this->valmistele('INSERT INTO KAYTTAJAT (Tunnus, Salasana)
-                                    VALUES (?, ?) RETURNING Kayttaja_ID');
-        if ($kysely->execute(array($tunnus, $salasana))) {
+        $kysely = $this->valmistele('INSERT INTO KAYTTAJAT (Tunnus, Salasana, Lupa)
+                                    VALUES (?, ?, ?) RETURNING Kayttaja_ID');
+        if ($kysely->execute(array($tunnus, $salasana, '0'))) {
             return $kysely->fetchColumn();
         }
         return false;
     }
 
-    public function lisaaKayttajalleOikeudet($kayttajaID) {
+    public function lisaaKayttajalleOikeudet($kayttajaID, $arvo) {
         $kysely = $this->valmistele('INSERT INTO KAYTTAJAT (Luvat) VALUES (?) WHERE Kayttaja_ID = ?');
-        if ($kysely->execute(array($kayttajaID))) {
+        if ($kysely->execute(array($arvo))) {
             return true;
         } else
             return false;
     }
     
     public function haeKayttajanOikeudet($kayttajaID) {
-        $kysely = $this->valmistele('SELECT Luvat FROM KAYTTAJAT WHERE kayttaja_ID = ?');
+        $kysely = $this->valmistele('SELECT Lupa FROM KAYTTAJAT WHERE kayttaja_ID = ?');
         if ($kysely->execute(array($kayttajaID))) {
             return $kysely->fetchColumn();
         } else

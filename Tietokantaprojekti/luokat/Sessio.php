@@ -26,7 +26,6 @@ class Sessio {
     }
 
     public function ohjausmsg(){
-        echo "Sinulla ei ole tarvittavia oikeuksia!";
     }
 }
 
