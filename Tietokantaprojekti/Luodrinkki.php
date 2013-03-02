@@ -12,6 +12,8 @@ oikkavarmistus();
         <link href="sivu.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <a class="uloskirjautuminen" href="Kayttajatunnukset.php?ulos">ulos</a>
+        <a href="drinkkilista.php">Takaisin</a>
         <h2>Taikuroi oma juomasi!</h2>
         <p>Täytä allaolevat kentät</p>
         <form action="Luodrinkkifunktiot.php?luo" method="POST">
@@ -39,7 +41,7 @@ oikkavarmistus();
                 ?>
                 <div>
                     <textarea name="ohje" id="ohje" rows="8" cols="50">Kirjoita ohje tähän!</textarea>
-                    <input type="submit" value = "luo!" />
+                    <input type="submit" value = "Luo!" />
                 </div>
             </fieldset>
         </form>

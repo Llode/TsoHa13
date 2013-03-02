@@ -33,13 +33,13 @@ class Kyselyt {
     }
 
     public function lisaaKayttajalleOikeudet($kayttajaID, $arvo) {
-        $kysely = $this->valmistele('INSERT INTO KAYTTAJAT (Luvat) VALUES (?) WHERE Kayttaja_ID = ?');
-        if ($kysely->execute(array($arvo))) {
+        $kysely = $this->valmistele('INSERT INTO KAYTTAJAT WHERE Kayttaja_ID = ? (Lupa) VALUES (?)');
+        if ($kysely->execute(array($kayttajaID, $arvo))) {
             return true;
         } else
             return false;
     }
-    
+
     public function haeKayttajanOikeudet($kayttajaID) {
         $kysely = $this->valmistele('SELECT Lupa FROM KAYTTAJAT WHERE kayttaja_ID = ?');
         if ($kysely->execute(array($kayttajaID))) {
@@ -73,8 +73,8 @@ class Kyselyt {
     }
 
     public function haeJuoma($nimi) {
-        $kysely = $this->valmistele('SELECT * FROM JUOMAT WHERE Juomannimi like ?
-                                    ORDER BY Juoma');
+        $kysely = $this->valmistele('SELECT * FROM JUOMAT WHERE Juomannimi = ?
+                                    ORDER BY Juomannimi');
         if ($kysely->execute(array($nimi))) {
             return $kysely->fetchAll(PDO::FETCH_OBJ);
         } else {
@@ -83,9 +83,21 @@ class Kyselyt {
     }
 
     public function haeJuomanAlt($nimi) {
-        $kysely = $this->valmistele('SELECT * FROM NIMET WHERE Nimi like ? 
-                                        ORDER BY Nimi');
-        if ($kysely->execute(array($nimi))) {
+        $kysely = $this->haeAltinID($nimi);
+        if ($kysely) {
+            $vastaus = $this->valmistele('SELECT * FROM JUOMAT WHERE JuomaID = ? ORDER BY Juomannimi');
+            if ($vastaus->execute(array($kysely))) {
+                return $vastaus->fetchAll(PDO::FETCH_OBJ);
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function haku($parametri) {
+        $kysely = $this->valmistele('SELECT JuomaID FROM JUOMAT WHERE juomannimi LIKE "%' . $parametri . '%"
+            OR SELECT ainesID FROM AINES WHERE ainesnimi LIKE "%' . $parametri . '%"');
+        if ($kysely->exectue(array())) {
             return $kysely->fetchAll(PDO::FETCH_OBJ);
         } else {
             return false;
@@ -146,13 +158,13 @@ class Kyselyt {
         }
     }
 
-    public function lisaaJuoma($nimi, $ohje) {
+    public function lisaaJuoma($nimi, $ohje, $lisaaja) {
         if ($this->haeJuoma($nimi)) {
             return null;
         } else {
-            $kysely = $this->valmistele('INSERT INTO JUOMAT (Juomannimi, Ohje)
-                                        VALUES (?, ?) RETURNING JuomaID');
-            if ($kysely->execute(array($nimi, $ohje))) {
+            $kysely = $this->valmistele('INSERT INTO JUOMAT (Lisannyt, Juomannimi, Ohje)
+                                        VALUES (?, ?, ?) RETURNING JuomaID');
+            if ($kysely->execute(array($lisaaja, $nimi, $ohje))) {
                 return $kysely->fetchColumn();
             }
         }

@@ -1,10 +1,6 @@
 <?php
 require_once 'apu.php';
-
-
 varmistus();
-
-$juomalista = $kyselija->haeKaikkiJuomat();
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,9 +13,19 @@ $juomalista = $kyselija->haeKaikkiJuomat();
         <a class="uloskirjautuminen" href="Kayttajatunnukset.php?ulos">ulos</a>
         <a href="adminsivu.php">Moderointisivu</a>
         <a href="Luodrinkki.php">Lisää drinkki arkistoon!</a>
-        
+
         <ul class="drinkkilista">
-            <?php foreach ($juomalista as $juoma) { ?>
+            
+            <h3>Haku</h3>
+            <form method ="post" action="search.php?go" id="haku">
+                <input type="text" name="nimi">
+                <input type="submit" name="submit" value="Search">
+            </form>
+            
+            <?php
+            $juomalista = $kyselija->haeKaikkiJuomat();          
+            foreach ($juomalista as $juoma) {
+                ?>
                 <li>  <a href="<?php echo "Resepti.php?resepti=" . $juoma->juomaid ?>"> <?php echo $juoma->juomannimi; ?> </a> </li>
             <?php } ?>
         </ul>

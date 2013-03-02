@@ -1,3 +1,8 @@
+<?php
+require_once 'apu.php';
+
+$otsikko = 'Drinkkikone - kirjaudu sisään';
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,9 +12,7 @@
     </head>
     <body>
 
-        <?php
-        $otsikko = 'Drinkkikone - kirjaudu sisään';
-        ?>
+
 
         <form class="kirjautuminen" action="Kayttajatunnukset.php?sisaan" method="POST">
             <h2>Kirjaudu sisään!</h2>

@@ -12,7 +12,8 @@ varmistus();
         <link href="sivu.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-
+        <a class="uloskirjautuminen" href="Kayttajatunnukset.php?ulos">ulos</a>
+        <a href="drinkkilista.php">Takaisin</a>
         <?php
         $drinkki_id = $_GET['resepti'];
         if ($drinkki_id) {
