@@ -6,6 +6,4 @@ Tunnetut ongelmat:
 
 -Drinkkien muokkausta ei ehditty implementoimaan.
 
--Drinkkien poistaminen kuuluisi adminsivun k‰ytt‰jien l‰hett‰mien drinkkien listaukseen, mutta koska se ei toimi, se on demonstrointitarkoituksessa p‰‰n‰kym‰n listassa.
-
 -Admin voi poistaa omat oikeutensa hallinnointisivulta.
