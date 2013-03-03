@@ -1,1 +1,1 @@
-insert into kayttajat (tunnus, salasana, lupa) values ('superuser', 'keppana', '2');
+insert into kayttajat (tunnus, salasana, lupa) values ('superuser', 'password', '2');

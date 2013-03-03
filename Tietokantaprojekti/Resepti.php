@@ -19,9 +19,12 @@ varmistus();
         if ($drinkki_id) {
             $aineslista = $kyselija->haeKaikkiAineet($drinkki_id);
             $drinkkiohje = $kyselija->haeJuomanResepti($drinkki_id);
+            $drinkinnimi = $kyselija->haeJuomanNimi($drinkki_id);
+            $drinkinalt = $kyselija->haeJuomanAlt($drinkinnimi);
         }
         ?>
         <ul>
+            <?php echo "$drinkinnimi" ?> , tunnetaan myös nimellä  <?php echo "$drinkinalt" ?>
         <?php foreach($aineslista as $aines) { ?>
             <li><p><?php echo $ainesnimi = $kyselija->haeAines($aines->ainesid);?></p> <p><?php echo $ainesmaara = $aines->maara; ?></p></li>
         <?php } ?>

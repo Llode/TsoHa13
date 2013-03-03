@@ -33,8 +33,8 @@ class Kyselyt {
     }
 
     public function lisaaKayttajalleOikeudet($kayttajaID, $arvo) {
-        $kysely = $this->valmistele('INSERT INTO KAYTTAJAT WHERE Kayttaja_ID = ? (Lupa) VALUES (?)');
-        if ($kysely->execute(array($kayttajaID, $arvo))) {
+        $kysely = $this->valmistele('UPDATE KAYTTAJAT SET lupa = ? WHERE Kayttaja_ID = ?');
+        if ($kysely->execute(array($arvo, $kayttajaID))) {
             return true;
         } else
             return false;
@@ -82,12 +82,21 @@ class Kyselyt {
         }
     }
 
+    public function haeJuomanNimi($id) {
+        $kysely = $this->valmistele('SELECT juomannimi FROM JUOMAT WHERE JuomaID = ?');
+        if($kysely->execute(array($id))) {
+            return $kysely->fetchColumn();
+        } else {
+            return false;
+        }
+    }
+    
     public function haeJuomanAlt($nimi) {
-        $kysely = $this->haeAltinID($nimi);
+        $kysely = $this->haeJuomaID($nimi);
         if ($kysely) {
-            $vastaus = $this->valmistele('SELECT * FROM JUOMAT WHERE JuomaID = ? ORDER BY Juomannimi');
+            $vastaus = $this->valmistele('SELECT Nimi FROM NIMET WHERE JuomaID = ?');
             if ($vastaus->execute(array($kysely))) {
-                return $vastaus->fetchAll(PDO::FETCH_OBJ);
+                return $vastaus->fetchColumn();
             }
         } else {
             return false;
@@ -158,18 +167,29 @@ class Kyselyt {
         }
     }
 
-    public function lisaaJuoma($nimi, $ohje, $lisaaja) {
+    public function lisaaJuoma($nimi, $ohje) {
         if ($this->haeJuoma($nimi)) {
             return null;
         } else {
-            $kysely = $this->valmistele('INSERT INTO JUOMAT (Lisannyt, Juomannimi, Ohje)
-                                        VALUES (?, ?, ?) RETURNING JuomaID');
-            if ($kysely->execute(array($lisaaja, $nimi, $ohje))) {
+            $kysely = $this->valmistele('INSERT INTO JUOMAT (Juomannimi, Ohje)
+                                        VALUES (?, ?) RETURNING JuomaID');
+            if ($kysely->execute(array($nimi, $ohje))) {
                 return $kysely->fetchColumn();
             }
         }
     }
 
+    public function lisaaJuomanTekija($nimi, $lisaaja) {
+        if ($this->haeJuoma($nimi)) {
+            $kysely = $this->valmistele('UPDATE JUOMAT SET Lisannyt = ? WHERE Juomannimi = ?');
+            if($kysely->execute(array($lisaaja, $nimi))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    
     public function lisaaAinesKantaan($aines) {
         $kysely = $this->valmistele('INSERT INTO AINES (ainesnimi) VALUES (?) 
                                     RETURNING ainesID');
