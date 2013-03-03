@@ -1,9 +1,11 @@
 <?php
 
 require_once 'apu.php';
+varmistus();
+
 if (trim($_POST['juomannimi']) != "") {
     $drinkki = $kyselija->lisaaJuoma($_POST['juomannimi'], $_POST['ohje']);
-    $drinkki3 = $kyselija->lisaaJuomanTekija($_POST['juomannimi'], $Sessio->kayttaja_id);
+    $drinkki3 = $kyselija->lisaaJuomanTekija($_POST['juomannimi'], $Sessio->kayttaja_ID);
     
     if (trim($_POST['altinnimi']) != "") {
         $drinkki2 = $kyselija->lisaaJuomalleNimi($_POST['juomannimi'], $_POST['altinnimi']);

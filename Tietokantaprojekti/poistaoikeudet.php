@@ -5,7 +5,13 @@ varmistus();
 adminvarmistus();
 
 $kayttajaid = $_GET['kayttaja'];
-$adminoi = $kyselija->lisaaKayttajalleOikeudet($kayttajaid, 0);
+$kayttajanoikat = $kyselija->haeKayttajanOikeudet(kayttajaid);
+if ($kayttajanoikat != 2) {
+    $adminoi = $kyselija->lisaaKayttajalleOikeudet($kayttajaid, 0);
+} else {
+    ohjaa('virhesivu.php');
+}
+
 
 if ($adminoi) {
     echo "muokkaaminen onnistui!";

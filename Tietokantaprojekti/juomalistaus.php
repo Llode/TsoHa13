@@ -19,7 +19,16 @@ adminvarmistus();
         <a href="adminsivu.php">Takaisin</a>
         <?php
         $kayttajaid = $_GET['kayttaja'];
-        // put your code here
         ?>
+        <ul class="drinkkilista">
+
+            <?php
+            $juomalista = $kyselija->haeKayttajanJuomat($kayttajaid);
+            foreach ($juomalista as $juoma) {
+                ?>
+                <li>  <a href="<?php echo "Resepti.php?resepti=" . $juoma->juomaid ?>"> <?php echo $juoma->juomannimi; ?> </a> 
+                    <a href="<?php echo "poistadrinkki.php?nimi=" . $juoma->juomannimi ?>"> [poista] </a> </li>
+            <?php } ?>
+        </ul>
     </body>
 </html>

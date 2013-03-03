@@ -24,7 +24,7 @@ varmistus();
         }
         ?>
         <ul>
-            <?php echo "$drinkinnimi" ?> , tunnetaan myös nimellä  <?php echo "$drinkinalt" ?>
+            <b><?php echo "$drinkinnimi" ?></b>, tunnetaan myös nimellä  <?php echo "$drinkinalt" ?>.
         <?php foreach($aineslista as $aines) { ?>
             <li><p><?php echo $ainesnimi = $kyselija->haeAines($aines->ainesid);?></p> <p><?php echo $ainesmaara = $aines->maara; ?></p></li>
         <?php } ?>

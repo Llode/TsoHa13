@@ -1,0 +1,11 @@
+Tunnetut ongelmat:
+
+-Hakukone löytää drinkkejä vain niiden oikealla nimellä.
+
+-Drinkin lisääjä ei tallennu taulukkoon, joten adminsivun drinkkilistaus ei tee mitään.
+
+-Drinkkien muokkausta ei ehditty implementoimaan.
+
+-Drinkkien poistaminen kuuluisi adminsivun käyttäjien lähettämien drinkkien listaukseen, mutta koska se ei toimi, se on demonstrointitarkoituksessa päänäkymän listassa.
+
+-Admin voi poistaa omat oikeutensa hallinnointisivulta.
