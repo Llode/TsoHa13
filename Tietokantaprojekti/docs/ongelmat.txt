@@ -2,8 +2,6 @@ Tunnetut ongelmat:
 
 -Hakukone löytää drinkkejä vain niiden oikealla nimellä.
 
--Drinkin lisääjä ei tallennu taulukkoon, joten adminsivun drinkkilistaus ei tee mitään.
-
 -Drinkkien muokkausta ei ehditty implementoimaan.
 
 -Admin voi poistaa omat oikeutensa hallinnointisivulta.
